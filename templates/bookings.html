@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+{% block content %}
+<style>
+    table{
+        margin-top: 100px;
+    }
+</style>
+
+<div class="container mt-5">
+    {% for message in messages  %}
+      
+    <h4 style="color:green">{{message}}</h4>
+    {% endfor %}
+    <table class="table table-bordered table-success">
+        <tr>
+            <th>Booking ID</th>
+            <th>Event</th>
+            <th>Amount</th>
+            <th>Time</th>
+            <th>Date</th>
+            <th>Company</th>
+            <th>Action</th> 
+        </tr>
+        {% for book in Booking %}
+          
+        <tr>
+            <form method="post">
+                {% csrf_token %}
+            <td>{{book.BookingID}}</td>
+            <td>{{book.EventID.Event_Name}} {{book.EventID.Event_Discription}}</td>
+            <td>{{book.EventID.Event_Price}}</td>
+            <td>{{book.EventTime}}</td>
+            <td>
+                {{book.EventDate}} <br>
+              <input type="date" name="date" id="changedate" required="">   
+              <button value="{{book.BookingID}}" name="id" class="btn btn-info">Change</button>
+            </td>
+            <td>{{book.EventID.Event_Name}}</td>
+            <td> <a class="btn btn-danger" href="{%url 'DeleteEventUser' book.BookingID %}" name="submit" onclick="alert('event deleted')" type="submit">Delete</a>
+            </td>
+        </form>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+<script>
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    let month = currentDate.getMonth() + 1;
+    let day = currentDate.getDate();
+  
+    month = month < 10 ? "0" + month : month;
+    day = day < 10 ? "0" + day : day;
+  
+     
+  
+    document.querySelector("#changedate").min = `${year}-${month}-${day}`;
+  </script>
+  
+{% endblock %}
+
+
+  

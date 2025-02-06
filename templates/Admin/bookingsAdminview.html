@@ -1,0 +1,42 @@
+{% extends "Admin/add_event.html" %}
+{% block content %}
+<style>
+    table{
+        margin-top: 100px;
+    }
+</style>
+<div class="container">
+    {% for message in messages  %}
+      
+    <h4 style="color:green">{{message}}</h4>
+    {% endfor %}
+
+    <table class="table table-bordered table-info">
+        <tr>
+            <th>Booking ID</th>
+            <th>Customer Name</th>
+            <th>Phone Number</th>
+            <th>Email Id</th>
+            <th>Event</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+        {% for item in booking  %}
+        {% if item.EventID.EventProvider == request.user %}
+        <tr>
+            <form method="post">
+                {% csrf_token %}
+            <td>{{item.BookingID}}</td>
+            <td>{{item.BookedBY.first_name}}</td>
+            <td>{{item.Phonenumber}}</td>
+            <td>{{item.Email}}</td>
+            <td>{{item.EventID.Event_Name}}{{item.EventID.Event_Discription}}</td>
+            <th>{{item.EventDate}}</th>
+            <td><button type="submit" name="id" class="btn btn-danger" value="{{item.BookingID}}">Cancel</button></td>
+            </form>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

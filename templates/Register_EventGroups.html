@@ -1,0 +1,60 @@
+{% extends 'register.html' %}
+
+{% block content %}
+<!-- ***** Main Banner Area Start ***** -->
+<div id="top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="left-content">
+                    <div class="inner-content">
+                        <h4>Event Booking</h4>
+                        <h6>Make Your Special Occation With Us</h6>
+                        <div class="main-white-button scroll-to-section">
+                            <a href="#reservation">Book An Event</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="container">
+                    <div class="contact-form">
+                    <form id="contact" method="post">
+                        {% csrf_token %}
+                      <div class="row">
+                        <div class="col-lg-12">
+                            <h4>EVENT GROUP REGISTER</h4>
+                            {% for message in messages %}
+
+                            <h6 style="color:red">{{message}}</h6>
+                            {% endfor %}
+                        </div>
+                        {% for fields in form%}
+                        <div class="col-lg-6 col-sm-12">
+                          <fieldset>
+                            {{fields.label}}: <br>
+                            {{fields}} <br> <br>
+
+                          </fieldset>
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="col-lg-12">
+                          <fieldset>
+                            <button type="submit" id="form-submit" class="main-button-icon">Register</button>
+                          </fieldset><br><br>
+                          Click <a href="{%url 'SignUp' %}">Here</a> User Registration
+
+                        </div>
+                      </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+
+{% endblock %}

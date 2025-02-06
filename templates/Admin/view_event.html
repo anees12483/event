@@ -1,0 +1,46 @@
+{% extends "Admin/add_event.html" %}
+{% block content %}
+<style>
+    table{
+        margin-top: 100px;
+    }
+</style>
+
+<div class="container mt-5">
+   
+    <table class="table table-info table-striped">
+        <tr>
+            {% for message in messages %}
+            <h4 style="color:red">{{meassge}}</h4>
+        {% endfor %}
+        </tr>
+        <tr>
+            <th>Event Name</th> 
+            <th>Event Catogary</th>
+            <th>Event Price</th>
+            <th>Advance</th> 
+            <th>Action</th>
+        </tr>
+        {% for item in events%}
+        <tr>
+            <td>{{item.Event_Name}}</td>
+            <td>{{item.Event_Catogary}}</td>
+            <td>{{item.Advance_Payment}}</td>
+            <td>{{item.Event_Price}}</td>
+            <td>
+              
+                    <!-- <a href="#" class="btn btn-warning" name="submit" type="submit">Update</a> -->
+                
+            </td>
+            <td>
+             
+                    
+                    <a class="btn btn-danger" href="{%url 'DeleteEvent' item.EventID %}" name="submit" onclick="alert('event deleted')" type="submit">Delete</a>
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+  
+{% endblock %}
